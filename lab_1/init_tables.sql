@@ -47,7 +47,7 @@ values (2001, 'Ivanov', 100, 'Perm'),
 on conflict do nothing;
 -----------------------------------------------------------------------------------
 
-create table sal
+create table if not exists sal
 (
     snum int primary key,
     name varchar(20)   not null,
