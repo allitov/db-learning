@@ -32,14 +32,14 @@ where p.pnum not in (
     where o.snum in (
         select s.snum
         from sal as s
-        where s.city = 'Москва'
+        where s.city = 'Moscow'
     )
 );
 
 -- task 5
 select *
 from cust as c
-where c.rating >= any (select c2.rating from cust as c2 where c2.city = 'Москва');
+where c.rating >= any (select c2.rating from cust as c2 where c2.city = 'Moscow');
 
 -- task 6
 select *
