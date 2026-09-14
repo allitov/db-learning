@@ -1,5 +1,5 @@
 -- task 1
-select s.snum, s.name, s.comm, s.city
+select *
 from sal as s
 where s.comm >= (select avg(s2.comm) from sal as s2);
 
@@ -10,7 +10,7 @@ group by o.cnum
 having sum(o.amt) <= (select sum(o2.amt) from ord as o2 where o2.cnum = 2003);
 
 -- task 3
-select s.snum, s.name, s.comm, s.city
+select *
 from sal as s
 where s.snum in (
     select o1.snum
@@ -37,12 +37,12 @@ where p.pnum not in (
 );
 
 -- task 5
-select c.cnum, c.name, c.rating, c.city
+select *
 from cust as c
 where c.rating >= any (select c2.rating from cust as c2 where c2.city = 'Москва');
 
 -- task 6
-select s.snum, s.name, s.comm, s.city
+select *
 from sal as s
 where s.snum not in (
     select o.snum
@@ -55,10 +55,7 @@ where s.snum not in (
 );
 
 -- task 7
-select s.snum,
-       s.name,
-       s.comm,
-       s.city,
+select *,
        case
            when s.comm < 0.12 then 'низкая'
            when s.comm <= 0.13 then 'средняя'
