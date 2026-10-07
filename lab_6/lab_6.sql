@@ -18,6 +18,10 @@ explain select *
 from cust
 order by city;
 
+delete
+from cust
+where name = 'test_name';
+
 -- task 4
 create table if not exists full_order_info as
 select o.*, p.name as prod_name, p.weight, p.city as prod_city,
