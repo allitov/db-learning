@@ -1,6 +1,7 @@
 -- task 1
 select *
-from pg_indexes;
+from pg_indexes
+where schemaname = 'my_schema';
 
 -- task 2
 create index if not exists cust_city_idx on cust (city);
