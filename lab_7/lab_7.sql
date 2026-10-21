@@ -74,3 +74,44 @@ select onum,
            range between 1 preceding and 1 following
            ) - 1 as cnt_other_orders
 from ord;
+
+-- practice
+create table if not exists ip (
+    id int primary key,
+    name varchar(30) not null,
+    surname varchar(30) not null,
+    mark smallint
+);
+
+insert into ip
+values (1, 'Alice', 'I', 5),
+       (2, 'Bob', 'P', NULL),
+       (3, 'Alice', 'S', 3),
+       (4, 'Bob', 'K', 4),
+       (5, 'Clemens', 'L', 2),
+       (6, 'Clemens', 'M', NULL),
+       (7, 'Alice', 'N', 5),
+       (8, 'Eva', 'O', 4),
+       (9, 'Bob', 'T', 3),
+       (10, 'Bob', 'U', 3) on conflict do nothing;
+
+SELECT
+    id, name, surname, mark,
+
+    count(*) OVER (PARTITION BY mark)
+        AS count_mark_all,
+
+    count(*) OVER (PARTITION BY name, mark)
+        AS count_mark_by_name,
+
+    count(*) OVER (PARTITION BY mark
+        ORDER BY id
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+        AS count_mark_frame_table,
+
+    count(*) OVER (PARTITION BY name, mark
+        ORDER BY id
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+        AS count_mark_frame_partition
+FROM ip
+ORDER BY id;
